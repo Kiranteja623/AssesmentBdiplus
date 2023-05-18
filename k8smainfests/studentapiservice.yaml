@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: studentapi-service
+spec:
+  selector:
+    app: studentapi
+  ports:
+    - port: 8088
+      targetPort: 8080
+  type: LoadBalancer

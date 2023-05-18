@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: studentapi-deployment
+  labels:
+    app: studentapi
+spec:
+  minReadySeconds: 14
+  replicas: 3
+  selector:
+    matchLabels:
+      app: studentapi
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      name: studentapi-deployment
+      labels:
+        app: studentapi
+    spec:
+      containers:
+           - name: nopcommerce
+             image: kiranteja623/studentcourseapi:1.0
+             ports:
+               - containerPort: 8080
+                 protocol: TCP
+             envFrom:
+               - configMapRef: 
+                   name: mysqlmaps
+

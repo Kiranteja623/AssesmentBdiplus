@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: mysqldeploy
+  labels:
+    app: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  replicas: 3
+  minReadySeconds: 10
+  template:
+    metadata:
+      name: mysqldeps
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysqlcontainer
+          image: mysql:latest
+          ports:
+            - containerPort: 3306
+          envFrom:
+            - configMapRef: 
+                name: mysqlmaps
+              
